@@ -1,13 +1,27 @@
-# National Home Value Analysis and Modeling
-Using time series modeling to analyze and forecast nation wide zipcode single family median home values using Facebook Prophet and ARIMA time series models.   
+# Forecasting National Home Values through Time Series Analysis
 
-#### This README.pdf file will serve as a roadmap to this repository. The repository is open and available to the public.
+Using Facebook Prophet and ARIMA time series models to analyze and forecast US nationwide median home values by ZIP code.
 
-### Directories and files to be aware of:
+## Project Summary
+### Methodology
+Using approximately 20 years of published data from Zillow on the monthly median home sale price for nearly 15,000 ZIP codes across the U.S., we examine the projected growth in each ZIP code to see how that market is expected to change in five years. We first performed a five year forecast using the Facebook Profit model for each ZIP code, and then identified 5 candidate ZIP codes with at least 20 years of data and the largest five year percent growth. We performed cross-validation on the 5 candidate ZIP code models and forecasted the five year period with an ARIMA model to provide secondary evidence.
 
-### • `zipcode` conda environment
+### Key Results 
+From our analyses, the top five ZIP codes based on 5 year appreciation rates are as follows: 
+  * 34982 - Fort Pierce, FL - projected 71% 5-year appreciation 
+  * 33982 - Punta Gorda, FL - projected 66% 5-year appreciation 
+  * 34951 - Fort Pierce, FL - projected 65% 5-year appreciation 
+  * 37209 - Nashville-Davidson, TN - projected 65% 5-year appreciation 
+  * 15201 - Pittsburgh, PA - projected 64% 5-year appreciation
 
-This project relies on you using the [`environment.yml`](environment.yml) file to recreate the `zipcode` conda environment. To do so, please run the following commands:
+The top three ZIP codes are located in coastal Florida communities. While these three ZIP codes have the largest percent growth, they have much larger confidence intervals than the last two, suggesting that Nashville and Pittsburgh may be “safer” investment opportunities. The large confidence intervals for the Florida communities may be a result of lingering effects from the 2008 recession.
+
+## Repo Guide and Setup
+
+Please clone this repo and then follow these instructions to set up the Python environment and source code.
+
+### _Python environment_
+This project relies on using the [`environment.yml`](environment.yml) file to recreate the `zipcode` conda environment. To do so, please run the following commands:
 
 ```bash
 # create the zipcode conda environment
@@ -20,7 +34,7 @@ conda activate zipcode
 python -m ipykernel install --user --name zipcode --display-name "Python (zipcode)"
 ```
 
-### • `.src` source code:
+### _`.src` source code_
 
 This project contains several .py modules in the `src/utilities` directory. Please use the following bash command to install the .src module:
 
@@ -29,55 +43,39 @@ This project contains several .py modules in the `src/utilities` directory. Plea
 pip install -e .
 ```
 
-### • A notebooks directory that contains multiple Jupyter Notebooks:
-    1. `notebooks/exploratory/EDA.ipynb`
+### Data
+The raw data is included in `/data/raw/zillow.csv`. This data was originally accessed via Zillow's data portal [here](https://www.zillow.com/research/data/).
 
-         This notebook performs basic data munging and preperation for initial Prophet Modeling. 
+In addition to the raw data, we include Python pickle files of the modeling results in `/data/processed/`. You can utilize these to avoid the long execution time of 
 
-    2. `notebooks/exploratory/model_batch.ipynb`
+### Notebooks
 
-        This streamlines the EDA notebook's process into a pipline implementation to perform batch modeling on the nearly 15000 zipcodes
-        
-    3. `notebooks/report/Prophet_Analysis.ipynb`
+In the `notebooks/` directory, you will find Jupyter notebooks containing both exploratory code and final results. These are organized as such:
 
-        This notebook builds the selection criteria and selects the top 5 zipcodes. We then perform model crossvalidation and analyze the forecasted median home values. 
+ 1. `notebooks/exploratory/EDA.ipynb`
+
+     This notebook performs basic data munging and processing for Facebook Prophet modeling. 
+
+2. `notebooks/exploratory/model_batch.ipynb`
+
+    This streamlines the EDA notebook's process into a pipeline implementation to perform batch modeling on the nearly 15000 ZIP codes.
     
-    4. `notebooks/report/ARIMA_Analysis.ipynb`
+3. `notebooks/report/Prophet_Analysis.ipynb`
 
-        This notebook builds a pipeline for ARIMA modeling. We then feed the top 5 zipcodes through this pipeline and analyze 
-    
-    5. `notebooks/report/ARIMA_Proph_comp.ipynb`
+    This notebook builds the selection criteria and selects the top 5 ZIP codes. We then perform model cross-validation and analyze the forecasted median home values. 
 
-        This notebook produces visualizations to compare the ARIMA and Prophet model forecasts. 
+4. `notebooks/report/ARIMA_Analysis.ipynb`
 
-### • The raw data is included in this public repo in `/data/raw/zillow.csv`
-This data was originally accessed via Zillow's data portal [here](https://www.zillow.com/research/data/)
+    This notebook builds a pipeline for ARIMA modeling. We feed the top 5 ZIP codes identified through Prophet analysis through this pipeline. 
 
-### • '.pickle' files
-If you wish to explore our results, you can avoid the long processing time of modeling by utilizing our pickled dictionaries of modeling outputs. These can be found in `/data/processed/` 
+5. `notebooks/report/ARIMA_Proph_comp.ipynb`
 
-### • A one-page .pdf memo summarizing our project written for non technical stakeholders can be found in the `/reports/memo.md`
-
-### • A side deck summarizing our project can be found `/reports/presentation.pdf`
+    This notebook produces visualizations to compare the ARIMA and Prophet model forecasts. 
 
 
+### Reports
+There is a one-page memo summarizing our project written for non technical stakeholders in `/reports/memo.md`. Additionally, there is a slide deck summarizing our project in `/reports/presentation.pdf`.
 
-
-## Methodology 
-Using approximately 20 years of published data from Zillow on the monthly median home sale price for nearly 15,000 Zip Codes across the U.S., we examine the projected growth in each Zip Code to see how that market is expected to change in five years. We first performed a five year forecast using the Facebook Profit model for each Zip Code, and then identified 5 candidate Zip Codes with at least 20 years of data and the largest five year percent growth. We performed cross-validation on the 5 candidate Zip Code models and reforecasted the five year period with an ARIMA model to provide secondary evidence.
-
-
-
-## Results 
-
-From our analysis, the five best zip codes to invest in are as follows: 
-  * 34982 - Fort Pierce, FL - projected 71% 5-year appreciation 
-  * 33982 - Punta Gorda, FL - projected 66% 5-year appreciation 
-  * 34951 - Fort Pierce, FL - projected 65% 5-year appreciation 
-  * 37209 - Nashville-Davidson, TN - projected 65% 5-year appreciation 
-  * 15201 - Pittsburgh, PA - projected 64% 5-year appreciation
-
-The top three Zip Codes are located in coastal Florida communities. While these three Zip Codes have the largest percent growth, they have much larger confidence intervals than the last two, suggesting that Nashville and Pittsburgh may be “safer” investment opportunities. The large confidence intervals for the Florida communities may be a result of lingering effects from the 2008 recession.
 
 
 
