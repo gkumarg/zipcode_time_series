@@ -1,3 +1,3 @@
 # Processed Data
 
-The final, canonical data sets which your reports use.
+This directory stores Python pickle files created from the Prophet analyses of over 15,000 US ZIP codes. 
