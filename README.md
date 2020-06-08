@@ -1,6 +1,6 @@
 # Forecasting National Home Values through Time Series Analysis
 
-Using Facebook Prophet and ARIMA time series models to analyze and forecast US nationwide median home values by ZIP code.
+Using Facebook Prophet and ARIMA time series models to analyze and forecast US nationwide median home values by ZIP code. There is an associated blog post describing the results [here](https://medium.com/@wvsharber/forecasting-national-home-values-through-time-series-analysis-924ac911c5a4).
 
 ## Project Summary
 ### Methodology
